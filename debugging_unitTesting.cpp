@@ -14,7 +14,6 @@ class BTreeNode
 		BTreeNode *Rchild;  //y or Y
 };
 
-
 /******************************************** CLASSES ADDED *****************************************************/
 /************************************************************************************************
 / Class BTree. Left Child will be to R/r nodes. Right Child will be to Y/y nodes.
