@@ -114,7 +114,6 @@ bool get_words(char * file_name, vector<string> &w);
 bool get_reads(char * file_name, vector<string> &r);
 bool write_vector_to_screen(vector<string> v);
 bool write_vector_to_file(vector<string> v, char * file_name);
-bool test2(vector<string> reads_to_be_tested, BTree testTree);
 
 int main()
 {
@@ -129,8 +128,9 @@ int main()
     for(int i=0;i<words.size();i++)
         b->add_word_to_tree(words[i]);
 
-    //test1(words, b); /** TEST 1 -- IS THE TREE CORRECTLY SET UP AND POPULATED **/
-
+/** TEST 1 -- IS THE TREE CORRECTLY SET UP AND POPULATED **/
+    cout<<b->add_word_to_tree("RYRY")<<endl;
+    cout<<b->is_word_in_tree("RYRY")<<endl;
 
     vector<string> reads;
     char * reads_file_name="input2.txt";       //make certain to place this file in the correct folder. Do not change path.
@@ -142,8 +142,11 @@ int main()
     for(int i=0;i<reads.size();i++)
         is_in[i]=b->is_word_in_tree(reads[i]);
 
-    test2(reads, b);/** TEST 2 -- IS THE TREE CORRECTLY SEARCHED **/
-
+/** TEST 2 -- IS THE TREE CORRECTLY SEARCHED **/
+    cout<<b->is_word_in_tree("RYRYRY")<<endl;
+    cout<<b->add_word_to_tree("RYRYRY")<<endl;
+    cout<<b->is_word_in_tree("RYRYRY")<<endl;
+    cout<<b->is_word_in_tree("RYRYRY")<<endl;
 
     delete is_in;
 
@@ -244,60 +247,4 @@ bool write_vector_to_file(vector<string> v, char * file_name)
     out.clear();
     out.close();
     return true;
-}
-
-/*bool test1(vector<string> reads_to_be_tested, BTree testTree)
-{
-    if (testTree->Root == NULL){
-        cout << "The tree does not exist!" << endl;
-        return false;
-    } else {
-
-    }
-}*/
-
-bool test2(vector<string> reads_to_be_tested, BTree* testTree)
-{
-    bool flag;                                     
-    
-    for(int i = 0; i < reads_to_be_tested.size(); i++)  
-    {
-        string currentWord = reads_to_be_tested[i];     
-        flag = true;
-        BTreeNode *currentNode = testTree->Root;
-        
-        for(int j = 0; j < reads_to_be_tested[i].length(); j++) {  
-                char nucleotide = tolower(currentWord[j]);                   
-                switch(nucleotide){                                
-                    case 'r':                     
-                        if (currentNode->Lchild == NULL ) {          
-                            flag = false;                             
-                        } else {                               
-                            currentNode = currentNode->Lchild;       
-                        }
-                    break;                              
-                    
-                    case 'y':                          
-                        if (currentNode->Rchild == NULL ) {          
-                            flag = false;                               
-                        } else {                                
-                            currentNode = currentNode->Rchild;        
-                        }
-                    break;                             
-                }
-        }
-        if (flag == true && testTree->is_word_in_tree(currentWord) == true) {     
-            cout << "The tree is being searched correctly!";
-            return true;
-        } else if (flag == true && testTree->is_word_in_tree(currentWord) == false){                
-            cout << "The tree is not being searched correctly!";
-            return false;
-        } else if (flag == false && testTree->is_word_in_tree(currentWord) == true){                
-            cout << "The tree is not being searched correctly!";
-            return false;
-        } else if (flag == false && testTree->is_word_in_tree(currentWord) == false){                
-            cout << "The tree is being searched correctly!";
-            return true;
-    }
-}
 }
