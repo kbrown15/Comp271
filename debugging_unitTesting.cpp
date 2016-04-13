@@ -129,8 +129,8 @@ int main()
         b->add_word_to_tree(words[i]);
 
 /** TEST 1 -- IS THE TREE CORRECTLY SET UP AND POPULATED **/
-    cout<<b->add_word_to_tree("RYRY")<<endl;
-    cout<<b->is_word_in_tree("RYRY")<<endl;
+    cout<<"This sould be true: " << b->add_word_to_tree("RYRY")<<endl;
+    cout<<"This should also be true: " << b->is_word_in_tree("RYRY")<<endl;
 
     vector<string> reads;
     char * reads_file_name="input2.txt";       //make certain to place this file in the correct folder. Do not change path.
@@ -143,10 +143,10 @@ int main()
         is_in[i]=b->is_word_in_tree(reads[i]);
 
 /** TEST 2 -- IS THE TREE CORRECTLY SEARCHED **/
-    cout<<b->is_word_in_tree("RYRYRY")<<endl;
+    cout<<"This should be false: " << b->is_word_in_tree("RYRYRY")<<endl;
     cout<<b->add_word_to_tree("RYRYRY")<<endl;
-    cout<<b->is_word_in_tree("RYRYRY")<<endl;
-    cout<<b->is_word_in_tree("RYRYRY")<<endl;
+    cout<<"This should be true: "<< b->is_word_in_tree("RYRYRY")<<endl;
+    cout<<"This should be true: "<< b->is_word_in_tree("RYRYRY")<<endl;
 
     delete is_in;
 
